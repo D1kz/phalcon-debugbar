@@ -67,7 +67,7 @@ class Profiler extends  PhalconProfiler {
 	 *
 	 * @return PhalconProfiler
 	 */
-	public function startProfile(string $sqlStatement, $sqlVariables = null, $sqlBindTypes = null) : PhalconProfiler
+	public function startProfile($sqlStatement, $sqlVariables = null, $sqlBindTypes = null)
 	{
 		$this->handleFailed();
 		$activeProfile = new Item();
@@ -214,6 +214,14 @@ class Profiler extends  PhalconProfiler {
 
         $this->_stoped = true;
         return $this;
+    }
+
+    /**
+     * @return PhalconProfiler\Item[]
+     */
+    public function getProfiles()
+    {
+        return $this->allProfiles;
     }
 
 	/**

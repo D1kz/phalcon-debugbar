@@ -140,6 +140,8 @@ class ServiceProvider extends Injectable {
 				ob_start();
 			});
 			$eventsManager->attach('micro:afterExecuteRoute',function($event,$app) use($debugbar){
+			    $debugbar->sendDataInHeaders(true);
+
 				$response = $app->response;
 				if ( null=== $returned=$app->getReturnedValue() ) {
 					$buffer = ob_get_clean();

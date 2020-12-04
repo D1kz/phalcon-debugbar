@@ -629,10 +629,13 @@ PROXY_CLASS;
                 &&
                 strpos($response->getHeaders()->get('Content-Type'), 'html') === false
             ) {
-                $data = $this->collect();
-                $content = json_decode($response->getContent(), true);
-                $data = array_merge($data, $content);
-                $response->setContent(json_encode($data));
+                $contentType = $response->getHeaders()->get('Content-Type');
+                if ($contentType !== 'text/css' && $contentType !== 'text/javascript') {
+                    $data = $this->collect();
+                    $content = json_decode($response->getContent(), true);
+                    $data = array_merge($data, $content);
+                    $response->setContent(json_encode($data));
+                }
             } elseif ($config->get('inject', true)) {
                 $response->setHeader('Phalcon-Debugbar', 'on');
                 $this->injectDebugbar($response);

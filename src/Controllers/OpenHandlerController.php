@@ -10,7 +10,6 @@ namespace Snowair\Debugbar\Controllers;
 use DebugBar\OpenHandler;
 use Phalcon\Config;
 use Phalcon\Http\Response;
-use Phalcon\Http\Request\Exception;
 use Snowair\Debugbar\PhalconDebugbar;
 
 /**
@@ -24,7 +23,7 @@ class OpenHandlerController extends BaseController {
             $debugbar = $this->debugbar;
             $debugbar->enable()->boot();
 
-            if ( !$this->session->exists() ) {
+            if ( !$this->session->isStarted() ) {
                 $this->session->start();
             }
 

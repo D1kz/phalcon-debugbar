@@ -221,7 +221,11 @@ class Profiler extends  PhalconProfiler {
      */
     public function getProfiles()
     {
-        return $this->allProfiles;
+        if (property_exists($this, 'allProfiles')) {
+            return $this->allProfiles;
+        }
+
+        return parent::getProfiles();
     }
 
 	/**
